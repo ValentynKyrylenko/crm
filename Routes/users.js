@@ -6,8 +6,15 @@ var Verify = require('./verify');
 
 /* GET users listing. */
 router.route('/')
-    .get(Verify.verifyOrdinaryUser, Verify.verifyAdmin, function (req, res, next) {
-        User.find({}, function (err, user) {
+    .get(Verify.verifyOrdinaryUser, function (req, res, next) {
+        var query = {};
+        if (req.query.manager) {
+            query.manager = req.query.manager;
+        }
+        else if (req.query.admin) {
+            query.admin = req.query.admin;
+        };
+        User.find(query, function (err, user) {
             if (err) {
                 var err = new Error('You are not authorized to perform this operation!');
                 err.status = 403;
@@ -35,6 +42,7 @@ router.post('/register', function (req, res) {
             });
         });
 });
+
 
 router.post('/login', function (req, res, next) {
     passport.authenticate('local', function (err, user, info) {
@@ -97,7 +105,74 @@ router.get('/facebook/callback', function (req, res, next) {
                 token: token
             });
         });
+
     })(req, res, next);
 });
+
+router.use('/:UserId', function (req, res, next) {
+    User.findById(req.params.UserId)
+        .exec(function (err, User) {
+            if (err)
+                res.status(500).send(err);
+            else if (User) {
+                req.User = User;
+                next();
+            }
+            else {
+                res.status(404).send('no User found');
+            }
+        });
+});
+
+router.route('/:UserId')
+    .get(function (req, res) {
+
+        var returnUser = req.User.toJSON();
+
+        returnUser.links = {};
+        var newLink_1 = 'http://' + req.headers.host + '/api/users/?manager=' + returnUser.manager;
+        returnUser.links.FilterByManager = newLink_1.replace(' ', '%20');
+        res.json(returnUser);
+
+    })
+    .put(function (req, res) {
+        req.User.username = req.body.username;
+        req.User.firstname = req.body.firstname;
+        req.User.lastname = req.body.lastname;
+        req.User.admin = req.body.admin;
+        req.User.manager = req.body.manager;
+        req.User.save(function (err) {
+            if (err)
+                res.status(500).send(err);
+            else {
+                res.json(req.User);
+            }
+        });
+    })
+    .patch(function (req, res) {
+        if (req.body._id)
+            delete req.body._id;
+
+        for (var p in req.body) {
+            req.User[p] = req.body[p];
+        }
+
+        req.User.save(function (err) {
+            if (err)
+                res.status(500).send(err);
+            else {
+                res.json(req.User);
+            }
+        });
+    })
+    .delete(function (req, res) {
+        req.User.remove(function (err) {
+            if (err)
+                res.status(500).send(err);
+            else {
+                res.status(204).send('Removed');
+            }
+        });
+    });
 
 module.exports = router;

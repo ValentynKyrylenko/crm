@@ -10,6 +10,7 @@ var db;
 console.log('Hello');
 db = mongoose.connect(config.mongoUrl);
 var Customer = require('./models/customerModel');
+var Report = require('./models/reportModel');
 
 var app = express();
 
@@ -25,8 +26,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 var customerRouter = require('./Routes/customerRoutes')(Customer);
+var reportRouter = require('./Routes/reportRoutes')(Report);
 var users = require('./Routes/users');
 app.use('/api/customers', customerRouter);
+app.use('/api/reports', reportRouter);
 app.use('/api/users', users);
 
 app.use(express.static('public'));

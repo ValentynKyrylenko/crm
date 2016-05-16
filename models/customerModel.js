@@ -17,6 +17,7 @@ var commentSchema = new Schema({
 var customerModel = new Schema({
     name: {type: String},
     surname: {type: String},
+    companyname: {type: String, default: 'NA'},
     country: {type: String},
     email: {type: String, unique:true},
     skype: {type: String, default: 'NA'},

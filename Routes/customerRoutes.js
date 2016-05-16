@@ -1,6 +1,6 @@
 var express = require('express');
 var Verify = require('./verify');
-var routes = function(Customer){
+var routes = function (Customer) {
     var CustomerRouter = express.Router();
 
     var CustomerController = require('../controllers/customerController')(Customer);
@@ -8,25 +8,23 @@ var routes = function(Customer){
         .post(Verify.verifyOrdinaryUser, CustomerController.post)
         .get(Verify.verifyOrdinaryUser, CustomerController.get);
 
-    CustomerRouter.use('/:CustomerId', function(req,res,next){
+    CustomerRouter.use('/:CustomerId', function (req, res, next) {
         Customer.findById(req.params.CustomerId)
-        .populate('comments.postedBy')
-        .exec(function(err,Customer){
-            if(err)
-                res.status(500).send(err);
-            else if(Customer)
-            {
-                req.Customer = Customer;
-                next();
-            }
-            else
-            {
-                res.status(404).send('no Customer found');
-            }
-        });
+            .populate('comments.postedBy')
+            .exec(function (err, Customer) {
+                if (err)
+                    res.status(500).send(err);
+                else if (Customer) {
+                    req.Customer = Customer;
+                    next();
+                }
+                else {
+                    res.status(404).send('no Customer found');
+                }
+            });
     });
     CustomerRouter.route('/:CustomerId')
-        .get(function(req,res){
+        .get(function (req, res) {
 
             var returnCustomer = req.Customer.toJSON();
 
@@ -42,9 +40,10 @@ var routes = function(Customer){
             res.json(returnCustomer);
 
         })
-        .put(function(req,res){
+        .put(function (req, res) {
             req.Customer.name = req.body.name;
             req.Customer.surname = req.body.surname;
+            req.Customer.companyname = req.body.companyname;
             req.Customer.country = req.body.country;
             req.Customer.email = req.body.email;
             req.Customer.skype = req.body.skype;
@@ -57,36 +56,35 @@ var routes = function(Customer){
             req.Customer.dueOn = req.body.dueOn;
             req.Customer.documents = req.body.documents;
             req.Customer.notes = req.body.notes;
-            req.Customer.save(function(err){
-                if(err)
+            req.Customer.save(function (err) {
+                if (err)
                     res.status(500).send(err);
-                else{
+                else {
                     res.json(req.Customer);
                 }
             });
         })
-        .patch(function(req,res){
-            if(req.body._id)
+        .patch(function (req, res) {
+            if (req.body._id)
                 delete req.body._id;
 
-            for(var p in req.body)
-            {
+            for (var p in req.body) {
                 req.Customer[p] = req.body[p];
             }
 
-            req.Customer.save(function(err){
-                if(err)
+            req.Customer.save(function (err) {
+                if (err)
                     res.status(500).send(err);
-                else{
+                else {
                     res.json(req.Customer);
                 }
             });
         })
-        .delete(function(req,res){
-            req.Customer.remove(function(err){
-                if(err)
+        .delete(function (req, res) {
+            req.Customer.remove(function (err) {
+                if (err)
                     res.status(500).send(err);
-                else{
+                else {
                     res.status(204).send('Removed');
                 }
             });
