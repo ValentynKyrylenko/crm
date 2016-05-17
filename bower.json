@@ -2,9 +2,9 @@
   "name": "library",
   "version": "0.0.0",
   "authors": [
-    "Jonathan Mills <jonathanfmills@gmail.com>"
+    "Valentyn Kyrylenko <valentynmail@gmail.com>"
   ],
-  "license": "MIT",
+  "license": "BetInvest",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -13,23 +13,20 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.5",
-    "font-awesome": "~4.4.0"
+    "angular": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
+    "angular-resource": "^1.5.5",
+    "ng-dialog": "^0.6.1",
+    "simple-line-icons": "^2.3.1",
+    "font-awesome": "fontawesome#^4.6.3"
   },
-    "overrides": {
-        "bootstrap": {
-            "main": [
-                "dist/js/bootstrap.js",
-                "dist/css/bootstrap.css",
-                "less/bootstrap.less"
-            ]
-        },
-        "font-awesome": {
-            "main": [
-                "less/font-awesome.less",
-                "css/font-awesome.min.css",
-                "scss/font-awesome.scss"
-            ]
-        }
-    }
+  "overrides":{
+  "font-awesome":{
+  "main":[
+  "less/font-awesome.less",
+  "css/font-awesome.min.css",
+  "scss/font-awesome.scss"
+  ]
+   }
+  }
 }

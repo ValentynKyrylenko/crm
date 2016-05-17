@@ -91,7 +91,7 @@ var routes = function (Customer) {
         });
     //Comments-------------------------------------------------
     CustomerRouter.route('/:CustomerId/comments')
-        .all(Verify.verifyOrdinaryUser)
+        //.all(Verify.verifyOrdinaryUser)
 
         .get(function (req, res, next) {
             Customer.findById(req.params.CustomerId)
@@ -102,9 +102,10 @@ var routes = function (Customer) {
                 });
         })
 
-        .post(function (req, res, next) {
+        .post(Verify.verifyOrdinaryUser, function (req, res, next) {
             Customer.findById(req.params.CustomerId, function (err, Customer) {
                 if (err) throw err;
+                //req.body.postedBy = req.decoded._id;
                 req.body.postedBy = req.decoded._doc._id;
                 Customer.comments.push(req.body);
                 Customer.save(function (err, Customer) {
@@ -132,7 +133,8 @@ var routes = function (Customer) {
         });
 
     CustomerRouter.route('/:CustomerId/comments/:commentId')
-        .all(Verify.verifyOrdinaryUser).get(function (req, res, next) {
+        //.all(Verify.verifyOrdinaryUser)
+        .get(Verify.verifyOrdinaryUser, function (req, res, next) {
             Customer.findById(req.params.CustomerId)
                 .populate('comments.postedBy')
                 .exec(function (err, Customer) {
@@ -141,7 +143,7 @@ var routes = function (Customer) {
                 });
         })
 
-        .put(function (req, res, next) {
+        .put(Verify.verifyOrdinaryUser, function (req, res, next) {
             // We delete the existing commment and insert the updated
             // comment as a new comment
             Customer.findById(req.params.CustomerId, function (err, Customer) {
@@ -157,7 +159,7 @@ var routes = function (Customer) {
             });
         })
 
-        .delete(function (req, res, next) {
+        .delete(Verify.verifyOrdinaryUser, function (req, res, next) {
             Customer.findById(req.params.CustomerId, function (err, Customer) {
                 if (Customer.comments.id(req.params.commentId).postedBy
                     != req.decoded._doc._id) {
