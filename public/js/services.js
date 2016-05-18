@@ -1,7 +1,7 @@
-'use strict';
+//'use strict';
 
 angular.module('crmApp')
-    .constant("baseURL", "https://localhost:3000/")
+    .constant("baseURL", "http://localhost:3000/")
     .factory('customerFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
         return $resource(baseURL + "api/customers/:id", null, {
@@ -98,10 +98,7 @@ angular.module('crmApp')
                 <div><h3>Login Unsuccessful</h3></div>' +
                             '<div><p>' +  response.data.err.message + '</p><p>' +
                             response.data.err.name + '</p></div>' +
-                            '<div class="ngdialog-buttons">\
-                                <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click=confirm("OK")>OK</button>\
-                            </div>'
-
+                            '<div class="ngdialog-buttons">\<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click=confirm("OK")>OK</button>\</div>'
                         ngDialog.openConfirm({ template: message, plain: 'true'});
                     }
 

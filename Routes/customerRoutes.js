@@ -6,14 +6,14 @@ var routes = function (Customer) {
     var CustomerController = require('../controllers/customerController')(Customer);
     CustomerRouter.route('/')
         .post(Verify.verifyOrdinaryUser, CustomerController.post)
-        .get(Verify.verifyOrdinaryUser, CustomerController.get);
+        .get(CustomerController.get);
 
     CustomerRouter.use('/:CustomerId', function (req, res, next) {
         Customer.findById(req.params.CustomerId)
             .populate('comments.postedBy')
             .exec(function (err, Customer) {
                 if (err)
-                    res.status(500).send(err);
+                    res.status(500).next(err);
                 else if (Customer) {
                     req.Customer = Customer;
                     next();
@@ -58,7 +58,7 @@ var routes = function (Customer) {
             req.Customer.notes = req.body.notes;
             req.Customer.save(function (err) {
                 if (err)
-                    res.status(500).send(err);
+                    res.status(500).next(err);
                 else {
                     res.json(req.Customer);
                 }
@@ -74,7 +74,7 @@ var routes = function (Customer) {
 
             req.Customer.save(function (err) {
                 if (err)
-                    res.status(500).send(err);
+                    res.status(500).next(err);
                 else {
                     res.json(req.Customer);
                 }
@@ -83,7 +83,7 @@ var routes = function (Customer) {
         .delete(function (req, res) {
             req.Customer.remove(function (err) {
                 if (err)
-                    res.status(500).send(err);
+                    res.status(500).next(err);
                 else {
                     res.status(204).send('Removed');
                 }
@@ -97,19 +97,19 @@ var routes = function (Customer) {
             Customer.findById(req.params.CustomerId)
                 .populate('comments.postedBy')
                 .exec(function (err, Customer) {
-                    if (err) throw err;
+                    if (err) next (err);
                     res.json(Customer.comments);
                 });
         })
 
         .post(Verify.verifyOrdinaryUser, function (req, res, next) {
             Customer.findById(req.params.CustomerId, function (err, Customer) {
-                if (err) throw err;
-                //req.body.postedBy = req.decoded._id;
-                req.body.postedBy = req.decoded._doc._id;
+                if (err) next (err);
+                req.body.postedBy = req.decoded._id;
+                //req.body.postedBy = req.decoded._doc._id;
                 Customer.comments.push(req.body);
                 Customer.save(function (err, Customer) {
-                    if (err) throw err;
+                    if (err) next (err);
                     console.log('Updated Comments!');
                     res.json(Customer);
                 });
@@ -118,12 +118,12 @@ var routes = function (Customer) {
 
         .delete(Verify.verifyAdmin, function (req, res, next) {
             Customer.findById(req.params.CustomerId, function (err, Customer) {
-                if (err) throw err;
+                if (err) next(err);
                 for (var i = (Customer.comments.length - 1); i >= 0; i--) {
                     Customer.comments.id(Customer.comments[i]._id).remove();
                 }
                 Customer.save(function (err, result) {
-                    if (err) throw err;
+                    if (err) next(err);
                     res.writeHead(200, {
                         'Content-Type': 'text/plain'
                     });
@@ -138,7 +138,7 @@ var routes = function (Customer) {
             Customer.findById(req.params.CustomerId)
                 .populate('comments.postedBy')
                 .exec(function (err, Customer) {
-                    if (err) throw err;
+                    if (err) next(err);
                     res.json(Customer.comments.id(req.params.commentId));
                 });
         })
@@ -147,12 +147,12 @@ var routes = function (Customer) {
             // We delete the existing commment and insert the updated
             // comment as a new comment
             Customer.findById(req.params.CustomerId, function (err, Customer) {
-                if (err) throw err;
+                if (err) next(err);
                 Customer.comments.id(req.params.commentId).remove();
-                req.body.postedBy = req.decoded._doc._id;
+                req.body.postedBy = req.decoded._id;
                 Customer.comments.push(req.body);
                 Customer.save(function (err, Customer) {
-                    if (err) throw err;
+                    if (err) next(err);
                     console.log('Updated Comments!');
                     res.json(Customer);
                 });
@@ -162,14 +162,14 @@ var routes = function (Customer) {
         .delete(Verify.verifyOrdinaryUser, function (req, res, next) {
             Customer.findById(req.params.CustomerId, function (err, Customer) {
                 if (Customer.comments.id(req.params.commentId).postedBy
-                    != req.decoded._doc._id) {
+                    != req.decoded._id) {
                     var err = new Error('You are not authorized to perform this operation!');
                     err.status = 403;
                     return next(err);
                 }
                 Customer.comments.id(req.params.commentId).remove();
                 Customer.save(function (err, resp) {
-                    if (err) throw err;
+                    if (err) next(err);
                     res.json(resp);
                 });
             });

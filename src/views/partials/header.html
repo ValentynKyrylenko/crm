@@ -24,6 +24,8 @@
         <ul class="nav pull-right top-menu">
 
             <a class="logo" ng-if="!loggedIn">Please Log In</a>
+            <a ng-if="loggedIn" class="logo" ng-if="!loggedIn">{{username}}</a>
+
             <!-- user login dropdown start-->
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -34,7 +36,7 @@
                 </a>
                 <ul class="dropdown-menu extended logout">
 
-                    <a ng-if="loggedIn">{{username}}</a>
+
                     <div class="log-arrow-up"></div>
                     <li class="eborder-top">
                         <a href="#"><i class="icon_profile"></i> My Profile</a>

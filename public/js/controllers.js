@@ -2,113 +2,33 @@
 
 angular.module('crmApp')
 
-    .controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory', function ($scope, menuFactory, favoriteFactory) {
+    .controller('CustomerController', ['$scope', 'customerFactory', function ($scope, customerFactory) {
 
-        $scope.tab = 1;
-        $scope.filtText = '';
-        $scope.showDetails = false;
-        $scope.showFavorites = false;
-        $scope.showMenu = false;
-        $scope.message = "Loading ...";
 
-        menuFactory.query(
+        customerFactory.query(
             function (response) {
-                $scope.dishes = response;
-                $scope.showMenu = true;
+                $scope.customers = response;
 
             },
             function (response) {
                 $scope.message = "Error: " + response.status + " " + response.statusText;
             });
-
-        $scope.select = function (setTab) {
-            $scope.tab = setTab;
-
-            if (setTab === 2) {
-                $scope.filtText = "appetizer";
-            } else if (setTab === 3) {
-                $scope.filtText = "mains";
-            } else if (setTab === 4) {
-                $scope.filtText = "dessert";
-            } else {
-                $scope.filtText = "";
-            }
-        };
-
-        $scope.isSelected = function (checkTab) {
-            return ($scope.tab === checkTab);
-        };
-
-        $scope.toggleDetails = function () {
-            $scope.showDetails = !$scope.showDetails;
-        };
-
-        $scope.toggleFavorites = function () {
-            $scope.showFavorites = !$scope.showFavorites;
-        };
-
-        $scope.addToFavorites = function(dishid) {
-            console.log('Add to favorites', dishid);
-            favoriteFactory.save({_id: dishid});
-            $scope.showFavorites = !$scope.showFavorites;
-        };
     }])
 
-    .controller('ContactController', ['$scope', 'feedbackFactory', function ($scope, feedbackFactory) {
 
-        $scope.feedback = {
-            mychannel: "",
-            firstName: "",
-            lastName: "",
-            agree: false,
-            email: ""
-        };
+    .controller('CustomerDetailController', ['$scope', '$state', '$stateParams', 'customerFactory', 'commentFactory', function ($scope, $state, $stateParams, customerFactory, commentFactory) {
 
-        var channels = [{
-            value: "tel",
-            label: "Tel."
-        }, {
-            value: "Email",
-            label: "Email"
-        }];
-
-        $scope.channels = channels;
-        $scope.invalidChannelSelection = false;
-
-        $scope.sendFeedback = function () {
-
-
-            if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
-                $scope.invalidChannelSelection = true;
-            } else {
-                $scope.invalidChannelSelection = false;
-                feedbackFactory.save($scope.feedback);
-                $scope.feedback = {
-                    mychannel: "",
-                    firstName: "",
-                    lastName: "",
-                    agree: false,
-                    email: ""
-                };
-                $scope.feedback.mychannel = "";
-                $scope.feedbackForm.$setPristine();
-            }
-        };
-    }])
-
-    .controller('DishDetailController', ['$scope', '$state', '$stateParams', 'menuFactory', 'commentFactory', function ($scope, $state, $stateParams, menuFactory, commentFactory) {
-
-        $scope.dish = {};
-        $scope.showDish = false;
+        $scope.customer = {};
+        $scope.showCustomer = false;
         $scope.message = "Loading ...";
 
-        $scope.dish = menuFactory.get({
+        $scope.customer = customerFactory.get({
                 id: $stateParams.id
             })
             .$promise.then(
                 function (response) {
-                    $scope.dish = response;
-                    $scope.showDish = true;
+                    $scope.customer = response;
+                    $scope.showCustomer = true;
                 },
                 function (response) {
                     $scope.message = "Error: " + response.status + " " + response.statusText;
@@ -135,111 +55,30 @@ angular.module('crmApp')
         }
     }])
 
-    // implement the IndexController and About Controller here
 
-    .controller('HomeController', ['$scope', 'menuFactory', 'corporateFactory', 'promotionFactory', function ($scope, menuFactory, corporateFactory, promotionFactory) {
-        $scope.showDish = false;
-        $scope.showLeader = false;
-        $scope.showPromotion = false;
-        $scope.message = "Loading ...";
-        var leaders = corporateFactory.query({
-                featured: "true"
-            })
-            .$promise.then(
-                function (response) {
-                    var leaders = response;
-                    $scope.leader = leaders[0];
-                    $scope.showLeader = true;
-                },
-                function (response) {
-                    $scope.message = "Error: " + response.status + " " + response.statusText;
-                }
-            );
-        $scope.dish = menuFactory.query({
-                featured: "true"
-            })
-            .$promise.then(
-                function (response) {
-                    var dishes = response;
-                    $scope.dish = dishes[0];
-                    $scope.showDish = true;
-                },
-                function (response) {
-                    $scope.message = "Error: " + response.status + " " + response.statusText;
-                }
-            );
-        var promotions = promotionFactory.query({
-                featured: "true"
-            })
-            .$promise.then(
-                function (response) {
-                    var promotions = response;
-                    $scope.promotion = promotions[0];
-                    $scope.showPromotion = true;
-                },
-                function (response) {
-                    $scope.message = "Error: " + response.status + " " + response.statusText;
-                }
-            );
-    }])
 
-    .controller('AboutController', ['$scope', 'corporateFactory', function ($scope, corporateFactory) {
-
-        $scope.leaders = corporateFactory.query();
-
-    }])
-
-    .controller('FavoriteController', ['$scope', '$state', 'favoriteFactory', function ($scope, $state, favoriteFactory) {
-
-        $scope.tab = 1;
-        $scope.filtText = '';
-        $scope.showDetails = false;
-        $scope.showDelete = false;
-        $scope.showMenu = false;
+    .controller('HomeController', ['$scope', 'customerFactory', function ($scope, customerFactory) {
+        $scope.showCustomer = false;
         $scope.message = "Loading ...";
 
-        favoriteFactory.query(
-            function (response) {
-                $scope.dishes = response.dishes;
-                $scope.showMenu = true;
-            },
-            function (response) {
-                $scope.message = "Error: " + response.status + " " + response.statusText;
-            });
+        $scope.customer = customerFactory.query({
+                //featured: "true"
+            })
+            .$promise.then(
+                function (response) {
+                    var customers = response;
+                    $scope.customer = customers[0];
+                    $scope.showCustomer = true;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
 
-        $scope.select = function (setTab) {
-            $scope.tab = setTab;
-
-            if (setTab === 2) {
-                $scope.filtText = "appetizer";
-            } else if (setTab === 3) {
-                $scope.filtText = "mains";
-            } else if (setTab === 4) {
-                $scope.filtText = "dessert";
-            } else {
-                $scope.filtText = "";
-            }
-        };
-
-        $scope.isSelected = function (checkTab) {
-            return ($scope.tab === checkTab);
-        };
-
-        $scope.toggleDetails = function () {
-            $scope.showDetails = !$scope.showDetails;
-        };
-
-        $scope.toggleDelete = function () {
-            $scope.showDelete = !$scope.showDelete;
-        };
-
-        $scope.deleteFavorite = function(dishid) {
-            console.log('Delete favorites', dishid);
-            favoriteFactory.delete({id: dishid});
-            $scope.showDelete = !$scope.showDelete;
-            $state.go($state.current, {}, {reload: true});
-        };
     }])
+
+
+
 
     .controller('HeaderController', ['$scope', '$state', '$rootScope', 'ngDialog', 'AuthFactory', function ($scope, $state, $rootScope, ngDialog, AuthFactory) {
 
