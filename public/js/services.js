@@ -2,9 +2,10 @@
 
 angular.module('crmApp')
     .constant("baseURL", "http://localhost:3000/")
+
     .factory('customerFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
-        return $resource(baseURL + "api/customers/:id", null, {
+        return $resource(baseURL + "api/customers/:id", {id:"@Id", customertId: "@CustomerId"}, {
             'update': {
                 method: 'PUT'
             }

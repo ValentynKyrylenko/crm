@@ -18,15 +18,16 @@
     "angular-resource": "^1.5.5",
     "ng-dialog": "^0.6.1",
     "simple-line-icons": "^2.3.1",
-    "font-awesome": "fontawesome#^4.6.3"
+    "font-awesome": "fontawesome#^4.6.3",
+    "angularUtils-pagination": "angular-utils-pagination#^0.11.1"
   },
-  "overrides":{
-  "font-awesome":{
-  "main":[
-  "less/font-awesome.less",
-  "css/font-awesome.min.css",
-  "scss/font-awesome.scss"
-  ]
-   }
+  "overrides": {
+    "font-awesome": {
+      "main": [
+        "less/font-awesome.less",
+        "css/font-awesome.min.css",
+        "scss/font-awesome.scss"
+      ]
+    }
   }
 }

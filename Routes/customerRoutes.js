@@ -5,7 +5,8 @@ var routes = function (Customer) {
 
     var CustomerController = require('../controllers/customerController')(Customer);
     CustomerRouter.route('/')
-        .post(Verify.verifyOrdinaryUser, CustomerController.post)
+        .post(CustomerController.post)
+        //.post(Verify.verifyOrdinaryUser, CustomerController.post)
         .get(CustomerController.get);
 
     CustomerRouter.use('/:CustomerId', function (req, res, next) {

@@ -2,7 +2,7 @@
 
 angular.module('crmApp')
 
-    .controller('CustomerController', ['$scope', 'customerFactory', function ($scope, customerFactory) {
+    .controller('CustomerController', ['$scope', '$state', '$stateParams',  'customerFactory', function ($scope, $state, $stateParams,  customerFactory) {
 
 
         customerFactory.query(
@@ -13,6 +13,38 @@ angular.module('crmApp')
             function (response) {
                 $scope.message = "Error: " + response.status + " " + response.statusText;
             });
+
+        $scope.submitCustomer = function () {
+
+            //$scope.customer = {
+            //    "name": "",
+            //    "surname": "",
+            //    "companyname": "",
+            //    "country": "",
+            //    "email": "",
+            //    "skype": "",
+            //    "phone": "",
+            //    "product": "",
+            //    "manager": "",
+            //    "stage": "",
+            //    "createdOn": "",
+            //    "modifiedOn": "",
+            //    "dueOn": "",
+            //    "documents": "",
+            //    "notes": "",
+            //    "comments":[]
+            //};
+            console.log($scope.customer);
+            customerFactory.save($scope.customer);
+
+            $state.go($state.current, {}, {reload: true});
+
+            $scope.customerForm.$setPristine();
+
+            $scope.customer = {
+
+            };
+        }
     }])
 
 

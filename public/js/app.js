@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('crmApp', ['ui.router','ngResource','ngDialog'])
+angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.directives.dirPagination'])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
 
@@ -8,13 +8,13 @@ angular.module('crmApp', ['ui.router','ngResource','ngDialog'])
             .state('app', {
                 url:'/',
                 views: {
-                    'header': {
-                        templateUrl : 'partials/header.html',
-                        controller  : 'HeaderController'
+                    'customers_table': {
+                        templateUrl : 'partials/customers_table.html',
+                        controller  : 'CustomerController'
                     },
-                    'content': {
-                        templateUrl : 'partials/home.html',
-                        controller  : 'HomeController'
+                    'quick_post_customers': {
+                        templateUrl : 'partials/quick_post_customers.html',
+                        controller  : 'CustomerController'
                     },
                     'side': {
                         templateUrl : 'partials/side.html',
