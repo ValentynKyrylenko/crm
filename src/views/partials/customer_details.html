@@ -1,0 +1,31 @@
+    <div class="ngdialog-message">
+        <div class="">
+            <h3>Client details</h3>
+            <hr/>
+        </div>
+        <div class="">&nbsp;</div>
+        <div class="">
+            <p><span style="font-weight: bold">NAME:</span> {{one_customer.name}}, <span style="font-weight: bold">SURNAME:</span> {{one_customer.surname}}</p>
+            <p><span style="font-weight: bold">COMPANY NAME:</span> {{one_customer.companyname}}</p>
+            <p><span style="font-weight: bold">COUNTRY:</span> {{one_customer.country}}</p>
+            <p><span style="font-weight: bold">EMAIL:</span> {{one_customer.email}}</p>
+            <p><span style="font-weight: bold">SKYPE:</span> {{one_customer.skype}}</p>
+            <p><span style="font-weight: bold">PHONE:</span> {{one_customer.phone}}</p>
+            <p><span style="font-weight: bold">PRODUCT:</span> {{one_customer.product}}</p>
+            <p><span style="font-weight: bold">MANAGER:</span> {{one_customer.manager}}</p>
+            <p><span style="font-weight: bold">STAGE:</span> {{one_customer.stage}}</p>
+            <p><span style="font-weight: bold">CREATED ON:</span> {{one_customer.createdOn|date:'dd/MM/yyyy'}}</p>
+            <p><span style="font-weight: bold">MODIFIED ON:</span> {{one_customer.modifiedOn|date:'dd/MM/yyyy'}}</p>
+            <p><span style="font-weight: bold">DUE ON:</span> {{one_customer.dueOn|date:'dd/MM/yyyy'}}</p>
+            <p><span style="font-weight: bold">DOCUMENTS:</span> {{one_customer.documents}}</p>
+            <p><span style="font-weight: bold">NOTES:</span> {{one_customer.notes}}</p>
+
+
+            <p style="text-align: center"><span style="font-weight: bold">Comments:</span></p>
+            <ul ng-repeat="comment in one_customer.comments">
+                <li><p><span style="font-weight: bold">COMMENTS:</span> {{comment}}</p></li>
+            </ul>
+        </div>
+
+
+    </div>

@@ -12,12 +12,16 @@ angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.dire
                         templateUrl : 'partials/customers_table.html',
                         controller  : 'CustomerController'
                     },
+                    'header':{
+                        templateUrl : 'partials/header.html',
+                        controller  : 'HeaderController'
+                    },
+                    'sidebar':{
+                        templateUrl : 'partials/sidebar.html'
+                    },
                     'quick_post_customers': {
                         templateUrl : 'partials/quick_post_customers.html',
                         controller  : 'CustomerController'
-                    },
-                    'side': {
-                        templateUrl : 'partials/side.html',
                     }
                 }
 

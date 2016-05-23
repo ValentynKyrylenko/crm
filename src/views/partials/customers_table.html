@@ -1,4 +1,4 @@
- <div class="col-lg-9 col-md-12">
+ <div class="col-lg-12 col-md-12">
      <div class="panel panel-default">
         <div class="panel-heading">
             <h2><i class="fa fa-flag-o red"></i><strong>Customers of Bet Invest</strong></h2>
@@ -43,13 +43,13 @@
                     <td>{{customer.product}}</td>
                     <td>{{customer.manager}}</td>
                     <td>{{customer.stage}}</td>
-                    <td>{{customer.dueOn}}</td>
+                    <td>{{customer.dueOn|date:'dd/MM/yyyy'}}</td>
 
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-primary" href="#"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
+                            <a class="btn btn-primary" ng-click=showCustomer(customer._id)><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
                             <a class="btn btn-success" href="#"><i class="fa fa-commenting-o" aria-hidden="true"></i></a>
-                            <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
+                            <a class="btn btn-danger" ng-click=editCustomer(customer._id)><i class="icon_close_alt2"></i></a>
                         </div>
                     </td>
 

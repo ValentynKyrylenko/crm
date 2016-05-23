@@ -1,0 +1,126 @@
+    <div class="ngdialog-message">
+        <div class="">
+            <h3>Details of the Client</h3>
+            <hr />
+        </div>
+        <div class=""></div>
+            <div class="">
+                <div class="form">
+                    <form class="form-validate form-horizontal" id="edit_customerForm" name="edit_customerForm" ng-submit="updateCustomer(edit_customer)" >
+                        <div class="form-group ">
+                            <label for="name" class="control-label col-lg-2">Name <span class="required">*</span></label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="name" name="name" minlength="2" type="text" required ng-model="edit_customer.name" placeholder='User name' />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="surname" class="control-label col-lg-2">Surname <span class="required">*</span></label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="surname" name="surname" minlength="2" type="text" required ng-model="edit_customer.surname" />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="companyname" class="control-label col-lg-2">Company name <span class="required">*</span></label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="companyname" name="companyname" minlength="2" type="text" required ng-model="edit_customer.companyname" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Country</label>
+                            <div class="col-lg-10">
+                                <input class="form-control"  id="country" name="country" type="text" ng-model="edit_customer.country" />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="email" class="control-label col-lg-2">E-Mail <span class="required">*</span></label>
+                            <div class="col-lg-10">
+                                <input class="form-control " id="email" type="email" name="email" required ng-model="edit_customer.email" />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="skype" class="control-label col-lg-2">Skype </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="skype" name="skype" minlength="2" type="text" ng-model="edit_customer.skype" />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="phone" class="control-label col-lg-2">Mobile </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="phone" name="phone" minlength="5" type="text" ng-model="edit_customer.phone" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Products</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" name="product" ng-model="edit_customer.product">
+                                    <option value="">- Please choose the product -</option>
+                                    <option value="Retail">Retail</option>
+                                    <option value="White Label">White Label</option>
+                                    <option value="Data Feed">Data Feed</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="manager" class="control-label col-lg-2">Account Manager </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="manager" name="manager" minlength="2" type="text" required ng-model="edit_customer.manager" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Stage</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" name="stage" ng-model="edit_customer.stage">
+                                    <option value="">- Choose Sale Stage -</option>
+                                    <option value="Prospect">Prospect</option>
+                                    <option value="Initial proposal">Initial proposal</option>
+                                    <option value="Testing">Testing</option>
+                                    <option value="Signed contract">Signed contract</option>
+                                    <option value="Permanent edit_customer">Permanent edit_customer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="dueOn" class="control-label col-lg-2">Due on date </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="dueOn" name="dueOn" type="date" placeholder="Set choose the project finish date" ng-model="edit_customer.dueOn" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Documents</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" name="documents" ng-model="edit_customer.documents">
+                                    <option value="">- Documents signed -</option>
+                                    <option value="1">D2B card</option>
+                                    <option value="2">Contract</option>
+                                    <option value="3">All</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label for="notes" class="control-label col-lg-2">Special requirements </label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="notes" name="notes" minlength="2" type="text" ng-model="edit_customer.notes"/>
+                            </div>
+                        </div>
+                        <!--<div class="form-group ">-->
+                        <!--<label for="comments" class="control-label col-lg-2">Comments </label>-->
+                        <!--<div class="col-lg-10">-->
+                        <!--<input class="form-control" id="comments" name="comments" placeholder="Comments, problems, tasks" minlength="2" type="text" ng-model="edit_customer.comments"/>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!-- Buttons -->
+                        <div class="form-group">
+                            <!-- Buttons -->
+                            <div class="col-lg-offset-2 col-lg-9">
+                                <button type="submit" class="btn btn-primary">Edit Details</button>
+                                <button type="reset" class="btn btn-default">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+        <div>
+
+        </div>
+    </div>
+        </div>

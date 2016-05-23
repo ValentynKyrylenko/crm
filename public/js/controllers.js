@@ -2,7 +2,7 @@
 
 angular.module('crmApp')
 
-    .controller('CustomerController', ['$scope', '$state', '$stateParams',  'customerFactory', function ($scope, $state, $stateParams,  customerFactory) {
+    .controller('CustomerController', ['$scope', '$state', '$stateParams',  'customerFactory', 'ngDialog', function ($scope, $state, $stateParams,  customerFactory, ngDialog) {
 
 
         customerFactory.query(
@@ -16,24 +16,6 @@ angular.module('crmApp')
 
         $scope.submitCustomer = function () {
 
-            //$scope.customer = {
-            //    "name": "",
-            //    "surname": "",
-            //    "companyname": "",
-            //    "country": "",
-            //    "email": "",
-            //    "skype": "",
-            //    "phone": "",
-            //    "product": "",
-            //    "manager": "",
-            //    "stage": "",
-            //    "createdOn": "",
-            //    "modifiedOn": "",
-            //    "dueOn": "",
-            //    "documents": "",
-            //    "notes": "",
-            //    "comments":[]
-            //};
             console.log($scope.customer);
             customerFactory.save($scope.customer);
 
@@ -41,14 +23,59 @@ angular.module('crmApp')
 
             $scope.customerForm.$setPristine();
 
-            $scope.customer = {
+            $scope.customer = customerFactory.get({
+                    id: $stateParams.id
+                })
+                .$promise.then(
+                    function (response) {
+                        $scope.customer = response;
+                        $scope.showCustomer = true;
+                    },
+                    function (response) {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
+        };
 
-            };
-        }
+        $scope.showCustomer = function (_id) {
+            $scope.one_customer = customerFactory.get({
+                    id: _id
+                })
+                .$promise.then(
+                    function (response) {
+                        $scope.one_customer = response;
+                    },
+                    function (response) {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
+            ngDialog.open({ template: 'partials/customer_details.html', scope: $scope, className: 'ngdialog-theme-default' });
+        };
+
+        $scope.editCustomer = function (_id) {
+            $scope.edit_customer = customerFactory.get({
+                    id: _id
+                })
+                .$promise.then(
+                    function (response) {
+                        $scope.edit_customer = response;
+                    },
+                    function (response) {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
+            ngDialog.open({ template: 'partials/edit_customer.html', scope: $scope, className: 'ngdialog-theme-default', controller:"CustomerController" });
+        };
+
+        $scope.updateCustomer = function(customer) { //Update the edited movie. Issues a PUT to /api/movies/:id
+            customerFactory.update(customer);
+            ngDialog.close();
+            $state.go($state.current, {}, {reload: true});
+        };
     }])
 
 
-    .controller('CustomerDetailController', ['$scope', '$state', '$stateParams', 'customerFactory', 'commentFactory', function ($scope, $state, $stateParams, customerFactory, commentFactory) {
+    .controller( 'CustomerDetailController', ['$scope', '$state', '$stateParams', 'customerFactory', 'commentFactory', function ($scope, $state, $stateParams, customerFactory, commentFactory) {
 
         $scope.customer = {};
         $scope.showCustomer = false;
