@@ -2,7 +2,7 @@
 
 angular.module('crmApp')
 
-    .controller('CustomerController', ['$scope', '$state', '$stateParams',  'customerFactory', 'ngDialog', function ($scope, $state, $stateParams,  customerFactory, ngDialog) {
+    .controller('CustomerController', ['$scope', '$state', '$stateParams',  'customerFactory', 'commentFactory', 'ngDialog', function ($scope, $state, $stateParams,  customerFactory, commentFactory, ngDialog) {
 
 
         customerFactory.query(
@@ -48,7 +48,7 @@ angular.module('crmApp')
                         $scope.message = "Error: " + response.status + " " + response.statusText;
                     }
                 );
-            ngDialog.open({ template: 'partials/customer_details.html', scope: $scope, className: 'ngdialog-theme-default' });
+            ngDialog.open({ template: 'partials/customer_details.html', scope: $scope, className: 'ngdialog-theme-default', controller:"CustomerController" });
         };
 
         $scope.editCustomer = function (_id) {
@@ -71,6 +71,20 @@ angular.module('crmApp')
             ngDialog.close();
             $state.go($state.current, {}, {reload: true});
         };
+
+        $scope.submitComment = function () {
+            console.log($stateParams.id);
+
+            commentFactory.save({id: $stateParams.id}, $scope.mycomment);
+
+            $state.go($state.current, {}, {reload: true});
+
+            $scope.commentForm.$setPristine();
+
+            $scope.mycomment = {
+               comment: ""
+            };
+        }
     }])
 
 
@@ -94,7 +108,6 @@ angular.module('crmApp')
             );
 
         $scope.mycomment = {
-            rating: 5,
             comment: ""
         };
 

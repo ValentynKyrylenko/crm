@@ -8,9 +8,8 @@ angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.dire
             .state('app', {
                 url:'/',
                 views: {
-                    'customers_table': {
-                        templateUrl : 'partials/customers_table.html',
-                        controller  : 'CustomerController'
+                    'map':{
+                        templateUrl : 'partials/map.html'
                     },
                     'header':{
                         templateUrl : 'partials/header.html',
@@ -25,63 +24,28 @@ angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.dire
                     }
                 }
 
-            });
+            })
+            // route for the customers page
+            .state('app.customers', {
+                url: 'api/customers',
+                views: {
+                    'content@': {
+                        templateUrl : 'partials/customers_table.html',
+                        controller  : 'CustomerController'
+                    }
+                }
+            })
 
-            //// route for the aboutus page
-            //.state('app.aboutus', {
-            //    url:'aboutus',
-            //    views: {
-            //        'content@': {
-            //            templateUrl : 'views/aboutus.html',
-            //            controller  : 'AboutController'
-            //        }
-            //    }
-            //})
-            //
-            //// route for the contactus page
-            //.state('app.contactus', {
-            //    url:'contactus',
-            //    views: {
-            //        'content@': {
-            //            templateUrl : 'views/contactus.html',
-            //            controller  : 'ContactController'
-            //        }
-            //    }
-            //})
-            //
-            //// route for the menu page
-            //.state('app.menu', {
-            //    url: 'menu',
-            //    views: {
-            //        'content@': {
-            //            templateUrl : 'views/menu.html',
-            //            controller  : 'MenuController'
-            //        }
-            //    }
-            //})
-            //
-            //// route for the dishdetail page
-            //.state('app.dishdetails', {
-            //    url: 'menu/:id',
-            //    views: {
-            //        'content@': {
-            //            templateUrl : 'views/dishdetail.html',
-            //            controller  : 'DishDetailController'
-            //        }
-            //    }
-            //})
-            //
-            //// route for the dishdetail page
-            //.state('app.favorites', {
-            //    url: 'favorites',
-            //    views: {
-            //        'content@': {
-            //            templateUrl : 'views/favorites.html',
-            //            controller  : 'FavoriteController'
-            //        }
-            //    }
-            //});
-
+        // route for the customers detail page
+        .state('app.customerdetails', {
+            url: 'api/customers/:id',
+            views: {
+                'content@': {
+                    templateUrl : 'partials/customerdetail.html',
+                    controller  : 'CustomerDetailController'
+                }
+            }
+        })
         $urlRouterProvider.otherwise('/');
     })
 ;
