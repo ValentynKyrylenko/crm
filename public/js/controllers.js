@@ -16,7 +16,6 @@ angular.module('crmApp')
 
         $scope.submitCustomer = function () {
 
-            console.log($scope.customer);
             customerFactory.save($scope.customer);
 
             $state.go($state.current, {}, {reload: true});

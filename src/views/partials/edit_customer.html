@@ -80,12 +80,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group ">
-                            <label for="dueOn" class="control-label col-lg-2">Due on date </label>
-                            <div class="col-lg-10">
-                                <input class="form-control" id="dueOn" name="dueOn" type="date" placeholder="Set choose the project finish date" ng-model="edit_customer.dueOn" />
-                            </div>
-                        </div>
+                        <!--<div class="form-group ">-->
+                            <!--<label for="dueOn" class="control-label col-lg-2">Due on date </label>-->
+                            <!--<div class="col-lg-10">-->
+                                <!--<input class="form-control" id="dueOn" name="dueOn" type="date" placeholder="Set choose the project finish date" ng-model="edit_customer.dueOn" />-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group">
                             <label class="control-label col-lg-2">Documents</label>
                             <div class="col-lg-10">
@@ -124,3 +124,9 @@
         </div>
     </div>
         </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#country").countrySelect();
+        });
+    </script>
