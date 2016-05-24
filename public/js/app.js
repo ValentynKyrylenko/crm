@@ -8,6 +8,9 @@ angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.dire
             .state('app', {
                 url:'/',
                 views: {
+                    'statistics':{
+                        templateUrl : 'partials/statistics.html'
+                    },
                     'map':{
                         templateUrl : 'partials/map.html'
                     },
