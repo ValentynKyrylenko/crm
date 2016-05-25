@@ -9,10 +9,14 @@ angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.dire
                 url:'/',
                 views: {
                     'statistics':{
-                        templateUrl : 'partials/statistics.html'
+                        templateUrl : 'partials/statistics.html',
+                        controller  : 'StatisticsController'
                     },
                     'map':{
                         templateUrl : 'partials/map.html'
+                    },
+                    'sideStatistics':{
+                        templateUrl : 'partials/sidestatistics.html'
                     },
                     'header':{
                         templateUrl : 'partials/header.html',

@@ -84,7 +84,7 @@ angular.module('crmApp')
             $scope.mycomment = {
                comment: ""
             };
-        }
+        };
     }])
 
 
@@ -123,7 +123,7 @@ angular.module('crmApp')
                 rating: 5,
                 comment: ""
             };
-        }
+        };
     }])
 
 
@@ -221,6 +221,27 @@ angular.module('crmApp')
 
         };
     }])
-;/**
- * Created by Lenovo on 18.05.2016.
- */
+
+    //------StatiscticsController
+    .controller('StatisticsController', ['$scope', '$state', '$stateParams',  'customerFactory', 'ngDialog', function ($scope, $state, $stateParams,  customerFactory,ngDialog) {
+
+
+        customerFactory.query(
+            function (response) {
+                $scope.statistics = response;
+                },
+            function (response) {
+                $scope.message = "Error: " + response.status + " " + response.statusText;
+            });
+
+        $scope.wl = customerFactory.query(
+            function (response) {
+                $scope.wl = response;
+            },
+            function (response) {
+                $scope.message = "Error: " + response.status + " " + response.statusText;
+            });
+
+
+    }])
+
