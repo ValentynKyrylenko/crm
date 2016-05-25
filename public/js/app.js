@@ -1,6 +1,17 @@
 'use strict';
 
-angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.directives.dirPagination'])
+angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.directives.dirPagination','chart.js'])
+    .config(['ChartJsProvider', function (ChartJsProvider) {
+        // Configure all charts
+        ChartJsProvider.setOptions({
+            //colours: ['#FF5252', '#FF8A80'],
+            responsive: false
+        });
+        // Configure all line charts
+        ChartJsProvider.setOptions('Line', {
+            datasetFill: false
+        });
+    }])
     .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
 
@@ -16,7 +27,8 @@ angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.dire
                         templateUrl : 'partials/map.html'
                     },
                     'sideStatistics':{
-                        templateUrl : 'partials/sidestatistics.html'
+                        templateUrl : 'partials/sidestatistics.html',
+                        controller  : 'StatisticsController'
                     },
                     'header':{
                         templateUrl : 'partials/header.html',

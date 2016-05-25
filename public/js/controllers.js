@@ -223,25 +223,43 @@ angular.module('crmApp')
     }])
 
     //------StatiscticsController
-    .controller('StatisticsController', ['$scope', '$state', '$stateParams',  'customerFactory', 'ngDialog', function ($scope, $state, $stateParams,  customerFactory,ngDialog) {
+    .controller('StatisticsController', ['$scope', '$state', '$stateParams',  'customerFactory', 'ngDialog', '$timeout', function ($scope, $state, $stateParams,  customerFactory,ngDialog, $timeout) {
 
 
         customerFactory.query(
             function (response) {
                 $scope.statistics = response;
+
+                $scope.testing = 0;
+                $scope.permanent = 0;
+                $scope.statistics.forEach(function(d) {
+                    if (d.hasOwnProperty('stage') && d['stage'] === 'Testing'){
+                        $scope.testing += 1;
+                    }
+                    else if (d.hasOwnProperty('stage') && d['stage'] === 'Permanent customer'){
+                        $scope.permanent +=1;
+                    }
+                });
                 },
             function (response) {
                 $scope.message = "Error: " + response.status + " " + response.statusText;
             });
 
-        $scope.wl = customerFactory.query(
-            function (response) {
-                $scope.wl = response;
-            },
-            function (response) {
-                $scope.message = "Error: " + response.status + " " + response.statusText;
-            });
 
 
+
+        $scope.labels = ["Testing stage", "Permanent customers"];
+
+
+        $scope.data = [$scope.testing, $scope.permanent];
+        $scope.onClick = function (points, evt) {
+            console.log(points, evt);
+        };
+
+
+        // Simulate async data update
+        $timeout(function () {
+            $scope.data = [$scope.testing, $scope.permanent];
+        }, 1000);
     }])
 
