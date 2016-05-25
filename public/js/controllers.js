@@ -232,12 +232,24 @@ angular.module('crmApp')
 
                 $scope.testing = 0;
                 $scope.permanent = 0;
+                $scope.prospects = 0;
+                $scope.proposals = 0;
+                $scope.contracts = 0;
                 $scope.statistics.forEach(function(d) {
                     if (d.hasOwnProperty('stage') && d['stage'] === 'Testing'){
                         $scope.testing += 1;
                     }
                     else if (d.hasOwnProperty('stage') && d['stage'] === 'Permanent customer'){
                         $scope.permanent +=1;
+                    }
+                    else if (d.hasOwnProperty('stage') && d['stage'] === 'Prospect'){
+                        $scope.prospects +=1;
+                    }
+                    else if (d.hasOwnProperty('stage') && d['stage'] === 'Initial proposal'){
+                        $scope.proposals +=1;
+                    }
+                    else if (d.hasOwnProperty('stage') && d['stage'] === 'Signed contract'){
+                        $scope.contracts +=1;
                     }
                 });
                 },
@@ -248,18 +260,28 @@ angular.module('crmApp')
 
 
 
+
+
+
+
         $scope.labels = ["Testing stage", "Permanent customers"];
-
-
+        $scope.labels2 = ["Prospects", "Sent proposals", "Signed contracts"];
         $scope.data = [$scope.testing, $scope.permanent];
+        $scope.data2 = [$scope.prospects, $scope.proposals, $scope.contracts];
+
+        $scope.type = 'PolarArea';
+        $scope.toggle = function () {
+            $scope.type = $scope.type === 'PolarArea' ?
+                'Pie' : 'PolarArea';
+        };
+
         $scope.onClick = function (points, evt) {
             console.log(points, evt);
         };
-
-
         // Simulate async data update
         $timeout(function () {
             $scope.data = [$scope.testing, $scope.permanent];
+            $scope.data2 = [$scope.prospects, $scope.proposals, $scope.contracts];
         }, 1000);
     }])
 
