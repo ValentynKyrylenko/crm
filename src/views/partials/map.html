@@ -2,7 +2,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2><i class="fa fa-map-marker red"></i><strong>Countries</strong></h2>
+            <h2><i class="fa fa-map-marker red"></i><strong>BET INVEST   -   GOING GLOBAL</strong></h2>
             <div class="panel-actions">
                 <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
                 <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
@@ -18,13 +18,23 @@
 
     <script>
         $(function() {
+
             $('#map').vectorMap({
                 map: 'world_mill_en',
                 series: {
                     regions: [{
-                        values: gdpData,
-                        scale: ['#000', '#000'],
-                        normalizeFunction: 'polynomial'
+                        values: {
+                            NG:'#FF9900',
+                            ZW:'#FF9900',
+                            AM:'#FF9900',
+                            RU:'#FF9900',
+                            RO:'#FF9900',
+                            HR:'#FF9900',
+                            BY:'#FF9900',
+                            TZ:'#FF9900',
+                            MD:'#FF9900',
+                            ZA:'#FF9900'
+                        }
                     }]
                 },
                 backgroundColor: '#eef3f7',
