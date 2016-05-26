@@ -1,6 +1,6 @@
 var reportController = function (Report) {
     var post = function (req, res) {
-        req.body.postedBy = req.decoded._doc._id;
+        req.body.postedBy = req.decoded._id;
         var report = new Report(req.body);
         if (!req.body.currentWeek) {
             res.status(400);

@@ -37,9 +37,16 @@ angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.dire
                     'sidebar':{
                         templateUrl : 'partials/sidebar.html'
                     },
+                    'calendar':{
+                        templateUrl : 'partials/calendar.html'
+                    },
                     'quick_post_customers': {
                         templateUrl : 'partials/quick_post_customers.html',
                         controller  : 'CustomerController'
+                    },
+                    'quick_post_report': {
+                        templateUrl : 'partials/report_create.html',
+                        controller  : 'ReportsController'
                     }
                 }
 
@@ -65,6 +72,30 @@ angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.dire
                 }
             }
         })
+
+        // route for the reports page
+            .state('app.reports', {
+                url: 'api/reports',
+                views: {
+                    'content@': {
+                        templateUrl : 'partials/reports_table.html',
+                        controller  : 'ReportsController'
+                    }
+                }
+            })
+
+            // route for reports detail page
+            .state('app.reportdetails', {
+                url: 'api/reports/:id',
+                views: {
+                    'content@': {
+                        templateUrl : 'partials/reportdetail.html',
+                        controller  : 'ReportDetailController'
+                    }
+                }
+            })
+
+
         $urlRouterProvider.otherwise('/');
     })
 ;

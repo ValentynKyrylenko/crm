@@ -1,0 +1,42 @@
+                <section class="panel">
+                    <header class="panel-heading">
+                        Submit Report
+                    </header>
+                    <div class="panel-body">
+                        <div class="form">
+                            <form class="form-validate form-horizontal" id="reportForm" name="reportForm" ng-submit="submitreport()" >
+                                <div class="form-group ">
+                                    <label for="currentWeek" class="control-label col-lg-2">Work Done <span class="required">*</span></label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="currentWeek" name="currentWeek" minlength="10" type="text" required ng-model="report.currentWeek" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="nextWeek" class="control-label col-lg-2">Work planned <span class="required">*</span></label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="nextWeek" name="nextWeek" minlength="10" type="text" required ng-model="report.nextWeek" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label for="weekNumber" class="control-label col-lg-2">Week number <span class="required">*</span></label>
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="weekNumber" name="weekNumber" type="number" required ng-model="report.weekNumber" />
+                                    </div>
+                                </div>
+
+                                 Buttons
+                                <div class="form-group">
+                                    <!-- Buttons -->
+                                    <div class="col-lg-offset-2 col-lg-9">
+                                        <button type="submit" class="btn btn-primary">Submit report</button>
+                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </section>
+
+
+

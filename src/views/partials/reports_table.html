@@ -1,0 +1,58 @@
+ <div class="col-lg-12 col-md-12">
+     <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2><i class="fa fa-flag-o red"></i><strong>Bet Invest Staff reports</strong></h2>
+            <div class="panel-actions">
+                <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
+                <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <!--Search------>
+            <div class="col-xs-4">
+                <h3>Reports page: {{ currentPage }}</h3>
+            </div>
+            <div class="col-xs-4">
+                <label for="search">Search:</label>
+                <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+            </div>
+            <div class="col-xs-4">
+                <label for="search">reports per page:</label>
+                <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+            </div>
+            <!-----Search--->
+            <table class="table table-striped bootstrap-datatable">
+                <thead>
+                <tr>
+                    <th>Today's week</th>
+                    <th>Created</th>
+                    <th>Following report</th>
+                    <th>Next week plan</th>
+                    <th>Surname</th>
+                    <th ><i class="icon_cogs"></i> Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr dir-paginate="report in reports | filter: q| itemsPerPage:  pageSize">{{report}}
+                    <td>{{today| date:'ww'}}</td>
+                    <td>{{report.createdOn| date:'ww yyyy'}}</td>
+                    <td>{{report.currentWeek}}</td>
+                    <td>{{report.nextWeek}}</td>
+                    <td>{{report.postedBy.lastname}}</td>
+
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-primary" ui-sref="app.reportdetails({id: report._id})"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
+                            <!--<a class="btn btn-success" ng-click=submitComment(report._id)><i class="fa fa-commenting-o" aria-hidden="true"></i></a>-->
+                            <a class="btn btn-warning" ng-click=editreport(report._id)><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                        </div>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+       <dir-pagination-controls></dir-pagination-controls>
+</div>

@@ -23,6 +23,16 @@ angular.module('crmApp')
 
     }])
 
+    .factory('reportFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
+
+        return $resource(baseURL + "api/reports/:id", {id:"@_id"}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+    }])
+
 
 
     .factory('$localStorage', ['$window', function ($window) {

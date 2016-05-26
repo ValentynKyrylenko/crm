@@ -285,3 +285,49 @@ angular.module('crmApp')
         }, 1000);
     }])
 
+//ReprtDetailController
+    .controller( 'ReportDetailController', ['$scope', '$state', '$stateParams', 'reportFactory', function ($scope, $state, $stateParams, reportFactory) {
+
+        $scope.report = {};
+
+        $scope.message = "Loading ...";
+
+        $scope.report = reportFactory.get({
+                id: $stateParams.id
+            })
+            .$promise.then(
+                function (response) {
+                    $scope.report = response;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
+
+
+    }])
+//ReprtController
+    .controller('ReportsController', ['$scope','$state', '$stateParams', 'reportFactory', function ($scope, $state, $stateParams, reportFactory) {
+        reportFactory.query(
+            function (response) {
+                $scope.reports = response;
+               },
+            function (response) {
+                $scope.message = "Error: " + response.status + " " + response.statusText;
+            });
+        $scope.today = new Date();
+
+        $scope.submitreport = function () {
+
+            reportFactory.save({id: $stateParams.id}, $scope.report);
+
+            $state.go($state.current, {}, {reload: true});
+
+            $scope.reportForm.$setPristine();
+
+            $scope.report = {
+
+            };
+        };
+    }])
+
