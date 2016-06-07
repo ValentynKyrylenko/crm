@@ -186,17 +186,19 @@ angular.module('crmApp')
             AuthFactory.logout();
             $scope.loggedIn = false;
             $scope.username = '';
+            $rootScope.showcontent = false;
         };
 
         $rootScope.$on('login:Successful', function () {
             $scope.loggedIn = AuthFactory.isAuthenticated();
             $scope.username = AuthFactory.getUsername();
+            $rootScope.showcontent = true;
         });
 
-        $rootScope.$on('registration:Successful', function () {
-            $scope.loggedIn = AuthFactory.isAuthenticated();
-            $scope.username = AuthFactory.getUsername();
-        });
+        //$rootScope.$on('registration:Successful', function () {
+        //    $scope.loggedIn = AuthFactory.isAuthenticated();
+        //    $scope.username = AuthFactory.getUsername();
+        //});
 
         $scope.stateis = function(curstate) {
             return $state.is(curstate);

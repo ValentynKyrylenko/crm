@@ -74,12 +74,13 @@
     <!--header start -->
         <div ui-view="header"></div>
     <!--header end-->
-
+ <div ng-if="showcontent"><!--NG-->
     <!--sidebar start -->
     <div ui-view="sidebar"></div>
     <!--sidebar end -->
 
     <!--main content start -->
+
     <section id="main-content">
         <section class="wrapper">
             <!--overview start-->
@@ -110,7 +111,6 @@
             </div>
 
 
-
             <div class="row">
                 <div class="col-md-6 portlets">
 
@@ -124,9 +124,11 @@
                <div ui-view="quick_post_customers"></div>
             </div>
 
+
         </section>
     </section>
     <!--main content end-->
+ </div><!--NG-->
 </section>
 <!-- container section start -->
 
