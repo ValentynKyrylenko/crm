@@ -47,9 +47,9 @@
 
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-primary" ui-sref="app.customerdetails({id: customer._id})"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
-                            <!--<a class="btn btn-success" ng-click=submitComment(customer._id)><i class="fa fa-commenting-o" aria-hidden="true"></i></a>-->
-                            <a class="btn btn-warning" ng-click=editCustomer(customer._id)><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a data-toggle="tooltip" data-placement="bottom" title="Customer details" class="btn btn-primary" ui-sref="app.customerdetails({id: customer._id})"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
+                            <a data-toggle="tooltip" data-placement="bottom" title="Edit a customer" class="btn btn-warning" ng-click=editCustomer(customer._id)><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a data-toggle="tooltip" data-placement="bottom" title="This will delete a customer!!!" class="btn btn-danger"  ng-click=deletecustomer(customer._id)><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
                         </div>
                     </td>
 
@@ -60,3 +60,15 @@
     </div>
        <dir-pagination-controls></dir-pagination-controls>
 </div>
+
+ <script>
+     $(document).ready(function(){
+         $('[data-toggle=tooltip]').hover(function(){
+             // on mouseenter
+             $(this).tooltip('show');
+         }, function(){
+             // on mouseleave
+             $(this).tooltip('hide');
+         });
+     });
+ </script>

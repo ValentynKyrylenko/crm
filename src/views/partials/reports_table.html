@@ -43,9 +43,7 @@
 
                     <td>
                         <div class="btn-group">
-                            <a class="btn btn-primary" ui-sref="app.reportdetails({id: report._id})"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
-                            <!--<a class="btn btn-success" ng-click=submitComment(report._id)><i class="fa fa-commenting-o" aria-hidden="true"></i></a>-->
-                            <a class="btn btn-warning" ng-click=editreport(report._id)><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a data-toggle="tooltip" data-placement="bottom" title="This will delete a report!!!" class="btn btn-danger"  ng-click=deletereport(report._id)><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
                         </div>
                     </td>
 

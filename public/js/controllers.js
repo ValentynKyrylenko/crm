@@ -21,19 +21,20 @@ angular.module('crmApp')
             $state.go($state.current, {}, {reload: true});
 
             $scope.customerForm.$setPristine();
+            $scope.customer = {};
 
-            $scope.customer = customerFactory.get({
-                    id: $stateParams.id
-                })
-                .$promise.then(
-                    function (response) {
-                        $scope.customer = response;
-                        $scope.showCustomer = true;
-                    },
-                    function (response) {
-                        $scope.message = "Error: " + response.status + " " + response.statusText;
-                    }
-                );
+            //$scope.customer = customerFactory.get({
+            //        id: $stateParams.id
+            //    })
+            //    .$promise.then(
+            //        function (response) {
+            //            $scope.customer = response;
+            //            $scope.showCustomer = true;
+            //        },
+            //        function (response) {
+            //            $scope.message = "Error: " + response.status + " " + response.statusText;
+            //        }
+            //    );
         };
 
         $scope.showCustomer = function (_id) {
@@ -72,6 +73,8 @@ angular.module('crmApp')
             $state.go($state.current, {}, {reload: true});
         };
 
+
+
         $scope.submitComment = function () {
             console.log($stateParams.id);
 
@@ -84,6 +87,20 @@ angular.module('crmApp')
             $scope.mycomment = {
                comment: ""
             };
+        };
+
+        $scope.deletecustomer = function(customer) { // Delete customer. Issues a DELETE to /api/customers/:id
+            customerFactory.delete({
+                    id: customer
+                })
+                .$promise.then(
+                function (response) {
+                    $scope.report = response;
+                    $state.go($state.current, {}, {reload: true});
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                });
         };
     }])
 
@@ -320,6 +337,20 @@ angular.module('crmApp')
             $scope.report = {
 
             };
+        };
+
+        $scope.deletereport = function(report) { // Delete report. Issues a DELETE to /api/reports/:id
+            reportFactory.delete({
+                    id: report
+                })
+                .$promise.then(
+                function (response) {
+                    $scope.report = response;
+                    $state.go($state.current, {}, {reload: true});
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                });
         };
     }])
 
