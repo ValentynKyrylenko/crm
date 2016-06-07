@@ -1,0 +1,58 @@
+ <div class="col-lg-12 col-md-12">
+     <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2><i class="fa fa-flag-o red"></i><strong>Registered users of the system</strong></h2>
+            <div class="panel-actions">
+                <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
+                <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <!--Search------>
+            <div class="col-xs-4">
+                <h3>Users page: {{ currentPage }}</h3>
+            </div>
+            <div class="col-xs-4">
+                <label for="search">Search:</label>
+                <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+            </div>
+            <div class="col-xs-4">
+                <label for="search">Users per page:</label>
+                <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+            </div>
+            <!-----Search--->
+            <table class="table table-striped bootstrap-datatable">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Admin</th>
+                    <th>Manager</th>
+                    <th ><i class="icon_cogs"></i> Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr dir-paginate="user in users | filter: q| itemsPerPage:  pageSize">{{user}}
+                    <td>{{user.username}}</td>
+                    <td>{{user.password}}</td>
+                    <td>{{user.firstname}}</td>
+                    <td>{{user.lastname}}</td>
+                    <td>{{user.admin}}</td>
+                    <td>{{user.manager}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-warning" ng-click=edituser(user._id)><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a class="btn btn-danger" ng-click=deleteuser(user._id)><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        </div>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+       <dir-pagination-controls></dir-pagination-controls>
+</div>

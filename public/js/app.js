@@ -95,6 +95,28 @@ angular.module('crmApp', ['ui.router','ngResource','ngDialog','angularUtils.dire
                 }
             })
 
+            // route for the users page
+            .state('app.users', {
+                url: 'api/users',
+                views: {
+                    'content@': {
+                        templateUrl : 'partials/users_table.html',
+                        controller  : 'UsersController'
+                    }
+                }
+            })
+
+            // route for user detail page
+            .state('app.userdetails', {
+                url: 'api/users/:id',
+                views: {
+                    'content@': {
+                        templateUrl : 'partials/userdetail.html',
+                        controller  : 'UserDetailController'
+                    }
+                }
+            })
+
 
         $urlRouterProvider.otherwise('/');
     })

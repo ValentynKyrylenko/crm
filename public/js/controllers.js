@@ -256,14 +256,6 @@ angular.module('crmApp')
             function (response) {
                 $scope.message = "Error: " + response.status + " " + response.statusText;
             });
-
-
-
-
-
-
-
-
         $scope.labels = ["Testing stage", "Permanent customers"];
         $scope.labels2 = ["Prospects", "Sent proposals", "Signed contracts"];
         $scope.data = [$scope.testing, $scope.permanent];
@@ -306,7 +298,7 @@ angular.module('crmApp')
 
 
     }])
-//ReprtController
+//ReportController
     .controller('ReportsController', ['$scope','$state', '$stateParams', 'reportFactory', function ($scope, $state, $stateParams, reportFactory) {
         reportFactory.query(
             function (response) {
@@ -329,5 +321,75 @@ angular.module('crmApp')
 
             };
         };
+    }])
+
+    //UserDetailController
+    .controller( 'UserDetailController', ['$scope', '$state', '$stateParams', 'reportFactory', function ($scope, $state, $stateParams, reportFactory) {
+
+        $scope.report = {};
+
+        $scope.message = "Loading ...";
+
+        $scope.report = reportFactory.get({
+                id: $stateParams.id
+            })
+            .$promise.then(
+                function (response) {
+                    $scope.report = response;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
+
+
+    }])
+    //UserController
+    .controller('UsersController', ['$scope','$state', '$stateParams', 'userFactory', 'ngDialog', function ($scope, $state, $stateParams, userFactory, ngDialog) {
+        userFactory.query(
+            function (response) {
+                $scope.users = response;
+            },
+            function (response) {
+                $scope.message = "Error: " + response.status + " " + response.statusText;
+            });
+        $scope.today = new Date();
+
+
+        $scope.deleteuser = function(user) { // Delete a user. Issues a DELETE to /api/users/:id
+            userFactory.delete({
+                    id: user
+                })
+                .$promise.then(
+                function (response) {
+                    $scope.report = response;
+                    $state.go($state.current, {}, {reload: true});
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                });
+        };
+
+        $scope.edituser = function (user) {
+            $scope.edit_user = userFactory.get({
+                    id: user
+                })
+                .$promise.then(
+                    function (response) {
+                        $scope.edit_user = response;
+                    },
+                    function (response) {
+                        $scope.message = "Error: " + response.status + " " + response.statusText;
+                    }
+                );
+            ngDialog.open({ template: 'partials/edit_user.html', scope: $scope, className: 'ngdialog-theme-default', controller:"UsersController" });
+        };
+
+        $scope.updateUser = function(user) { //Update the edited user. Issues a PUT to /api/users/:id
+            userFactory.update(user);
+            ngDialog.close();
+            $state.go($state.current, {}, {reload: true});
+        };
+
     }])
 
