@@ -44,6 +44,7 @@ angular.module('crmApp')
     }])
 
 
+
     .factory('$localStorage', ['$window', function ($window) {
         return {
             store: function (key, value) {
