@@ -65,12 +65,14 @@ angular.module('crmApp')
                     }
                 );
             ngDialog.open({ template: 'partials/edit_customer.html', scope: $scope, className: 'ngdialog-theme-default', controller:"CustomerController" });
+            $scope.edit_customer = {};
         };
 
         $scope.updateCustomer = function(customer) { //Update the edited movie. Issues a PUT to /api/movies/:id
             customerFactory.update(customer);
             ngDialog.close();
             $state.go($state.current, {}, {reload: true});
+            $scope.customer = {};
         };
 
 

@@ -30,6 +30,7 @@ var customerModel = new Schema({
     dueOn: {type: Date},
     documents: {type: String, default: 'NA'},
     notes: {type: String,  default: 'NA'},
+    event_: {type: String,  default: 'NA'},
     comments:[commentSchema]
 },
 {

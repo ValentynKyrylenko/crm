@@ -91,9 +91,10 @@
                             <div class="col-lg-10">
                                 <select class="form-control" name="documents" ng-model="edit_customer.documents">
                                     <option value="">- Documents signed -</option>
-                                    <option value="1">D2B card</option>
-                                    <option value="2">Contract</option>
-                                    <option value="3">All</option>
+                                    <option value="None">None</option>
+                                    <option value="D2B card">D2B card</option>
+                                    <option value="Contract">Contract</option>
+                                    <option value="All">All</option>
                                 </select>
                             </div>
                         </div>
@@ -109,6 +110,20 @@
                         <!--<input class="form-control" id="comments" name="comments" placeholder="Comments, problems, tasks" minlength="2" type="text" ng-model="edit_customer.comments"/>-->
                         <!--</div>-->
                         <!--</div>-->
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">Event</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" name="event_" ng-model="edit_customer.event_">
+                                    <option value="">- How did you meet? -</option>
+                                    <option value="Amsterdam Affiliate Conference">Amsterdam Affiliate Conference</option>
+                                    <option value="Berlin EiG">Berlin EiG</option>
+                                    <option value="ICE Totally Gaming">ICE Totally Gaming</option>
+                                    <option value="Incoming request">Incoming request</option>
+                                    <option value="Other">Other</option>
+                                    <option value="WRB  Africa">WRB  Africa</option>
+                                </select>
+                            </div>
+                        </div>
                         <!-- Buttons -->
                         <div class="form-group">
                             <!-- Buttons -->
