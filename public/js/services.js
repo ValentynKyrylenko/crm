@@ -1,7 +1,7 @@
 //'use strict';
 
 angular.module('crmApp')
-    .constant("baseURL", "http://139.59.134.131/:3000")
+    .constant("baseURL", "http://139.59.134.131:3000/")
 
     .factory('customerFactory', ['$resource', 'baseURL', function ($resource, baseURL) {
 
