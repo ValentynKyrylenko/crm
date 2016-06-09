@@ -1,0 +1,21 @@
+# crm
+b2b Crm system for BetInvest
+
+Author: Valentyn Kyrylenko.
+Project Title: CRM system for a medium sized company.
+Developed for BetInvest Ltd to be used by sales department for keeping track of potential customers and managing the existing ones.
+
+1.	Introduction.
+a.	General overview: the salient features of the project have been developed with a view of making day to day operations of sales department of medium size company more effective. Being a sales director of the company as well as an IT developer I find that majority of the CRM systems offered by other companies are overloaded with the features that are never used and make CRM more cumbersome. That is why I included only those features that are actually used by our sales reps with the view of making the system simple and easy to use. Bellow I will describe the main features.
+b.	Managing customers. The system lets sales representatives easily create and manage the database of the customers. The user can enter Customer data, update it, comment on each individual customer or delete it. To make the search process easier I implemented the SEARCH and PAGINATIOM for Customers table. Different workers within the company can leave comments about each Customer so the senior management can track the progress.
+c.	Live charts. As data is being entered into database, live charts show what products customers use and how many introduction letters have been sent to potential customers. More charts can be easily added to the system to show other details.
+d.	Staff reports. As a Sale Director, I need to know what my staff is doing every day. So “Staff Reports” section was implemented. It shows what work has been done during the following week and what is a plan for the next one. The table is searchable by various criteria’s such as Surname, number of the week ETC.
+e.	Users section. This section was developed to allow different roles assignment for different users. It can be made to be accessed by admin only. Within this section Admin can assign different roles for different users of the system so they can have different access rights.
+f.	Documents. Every organization has a numbers of draft Agreements and standardized documents that are used in day-to-day operations. This section lets the user to easily download the document he needs.
+g.	Regions. This section is for regional representatives. It is still under development.
+
+2.	Design and Implementation. The system was designed by using so called MEAN STACK technology (MongoDB, Express.js, Angular.js, Node.js) to make is very fast and responsive with the “desktop-like” look and feel. Converging from design to implementing the code was done with the help of Balsamic Mockups (see crm_mockup_Kyrylenko.pdf to see the design process).  Since the project deals with Users, Customers, Reports – corresponding models were created. REST server that deals with them is created with the help of Express.js. Exchanging data between the server and front-end is done with the help of $resource Angular service. To make front-end mobile friendly I used bootstrap. To paginate tables I used https://github.com/michaelbromley/angularUtils/tree/master/src/directives/pagination module. To implement responsive charts, I used Angular-chart.js library.  I decided to use interactive map to show what countries the company operates in. Jvectormap.js was used for this purpose. The calendar section that is found on the CRM is developed with the help of Google Calendar API, this calendar can be used by different users so they can enter data into it. The whole process is described in crm_Kyrylenko.pdf file. User authentication is done with Passport.js library. To let the users enter the country for a Customer fast I used Country Picker jQuery plugins http://bootstrapformhelpers.com/country/
+
+3.	Conclusion. The result of the project is the easy to use CRM for a medium sized company. However, there are a few shortcomings of the project. They arised mainly due to the lack of time and will be dealt with in a future. First of all, I would like to implement a separate login page for a project and make more roles for users.
+
+To be used with BetInvest Ltd permision only

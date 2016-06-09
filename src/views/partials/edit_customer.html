@@ -1,4 +1,7 @@
-    <div class="ngdialog-message">
+<!--Country Select -->
+<link href="css/modules/countrySelect.css" rel="stylesheet" media="screen">
+
+<div class="ngdialog-message">
         <div class="">
             <h3>Details of the Client</h3>
             <hr />
@@ -28,7 +31,7 @@
                         <div class="form-group">
                             <label class="control-label col-lg-2">Country</label>
                             <div class="col-lg-10">
-                                <input class="form-control"  id="country" name="country" type="text" ng-model="edit_customer.country" />
+                                <input class="form-control"  id="country_2" name="country" type="text" ng-model="edit_customer.country" />
                             </div>
                         </div>
                         <div class="form-group ">
@@ -142,6 +145,6 @@
 
     <script>
         $(document).ready(function() {
-            $("#country").countrySelect();
+            $("#country_2").countrySelect();
         });
     </script>
