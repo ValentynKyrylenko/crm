@@ -6,7 +6,7 @@ var Verify = require('./verify');
 
 /* GET users listing. */
 router.route('/')
-    .get(Verify.verifyOrdinaryUser, function (req, res, next) {
+    .get(Verify.verifyAdmin, function (req, res, next) {
         var query = {};
         if (req.query.manager) {
             query.manager = req.query.manager;
@@ -62,7 +62,7 @@ router.post('/login', function (req, res, next) {
             }
 
             //var token = Verify.getToken(user);
-            var token = Verify.getToken({"username":user.username, "_id":user.id, "admin":user.admin});
+            var token = Verify.getToken({"username":user.username, "_id":user.id, "admin":user.admin, "manager":user.manager});
             res.status(200).json({
                 status: 'Login successful!',
                 success: true,
@@ -110,7 +110,7 @@ router.get('/facebook/callback', function (req, res, next) {
     })(req, res, next);
 });
 
-router.use('/:UserId', function (req, res, next) {
+router.use('/:UserId', Verify.verifyAdmin, function (req, res, next) {
     User.findById(req.params.UserId)
         .exec(function (err, User) {
             if (err)

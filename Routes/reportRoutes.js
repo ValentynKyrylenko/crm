@@ -5,10 +5,10 @@ var routes = function (Report) {
 
     var ReportController = require('../controllers/reportController')(Report);
     ReportRouter.route('/')
-        .post(Verify.verifyOrdinaryUser,  ReportController.post)
-        .get(Verify.verifyOrdinaryUser, ReportController.get);
+        .post(Verify.verifyManager,  ReportController.post)
+        .get(Verify.verifyManager, ReportController.get);
 
-    ReportRouter.use('/:ReportId', function (req, res, next) {
+    ReportRouter.use('/:ReportId',Verify.verifyManager, function (req, res, next) {
         Report.findById(req.params.ReportId)
             .populate('postedBy')
             .exec(function (err, Report) {

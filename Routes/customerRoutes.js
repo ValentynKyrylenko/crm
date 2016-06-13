@@ -5,11 +5,11 @@ var routes = function (Customer) {
 
     var CustomerController = require('../controllers/customerController')(Customer);
     CustomerRouter.route('/')
-        .post(CustomerController.post)
+        .post(Verify.verifyManager, CustomerController.post)
         //.post(Verify.verifyOrdinaryUser, CustomerController.post)
-        .get(CustomerController.get);
+        .get(Verify.verifyManager, CustomerController.get);
 
-    CustomerRouter.use('/:CustomerId', function (req, res, next) {
+    CustomerRouter.use('/:CustomerId',Verify.verifyManager, function (req, res, next) {
         Customer.findById(req.params.CustomerId)
             .populate('comments.postedBy')
             .exec(function (err, Customer) {
@@ -57,6 +57,7 @@ var routes = function (Customer) {
             req.Customer.dueOn = req.body.dueOn;
             req.Customer.documents = req.body.documents;
             req.Customer.notes = req.body.notes;
+            req.Customer.event_ = req.body.event_;
             req.Customer.save(function (err) {
                 if (err)
                     res.status(500).next(err);
