@@ -2,7 +2,7 @@
     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
         <div class="info-box blue-bg">
             <i class="fa fa-laptop"></i>
-            <div class="count">{{(statistics | filter:{product:'White Label'}).length}}</div>
+            <div class="count">{{(statistics | filter:{product:'White Label', stage: 'Permanent customer'}).length}}</div>
             <div class="title">White Label</div>
         </div>
         <!--/.info-box-->
@@ -12,7 +12,7 @@
     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
         <div class="info-box brown-bg">
             <i class="fa fa-database"></i>
-            <div class="count">{{(statistics | filter:{product:'Data Feed'}).length}}</div>
+            <div class="count">{{(statistics | filter:{product:'Data Feed', stage: 'Permanent customer'}).length}}</div>
             <div class="title">Live Odds</div>
         </div>
         <!--/.info-box-->
@@ -22,7 +22,7 @@
     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
         <div class="info-box dark-bg">
             <i class="fa fa-home"></i>
-            <div class="count">{{(statistics | filter:{product:'Retail'}).length}}</div>
+            <div class="count">{{(statistics | filter:{product:'Retail', stage: 'Permanent customer'}).length}}</div>
             <div class="title">Retail</div>
         </div>
         <!--/.info-box-->
