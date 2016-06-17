@@ -106,6 +106,39 @@ angular.module('crmApp')
                     $scope.message = "Error: " + response.status + " " + response.statusText;
                 });
         };
+
+        //Sweet alert
+        $scope.sweet = {};
+        $scope.sweet.option = {
+            title: "Are you sure?",
+            text: "You will not be able to recover this Customer!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }
+        $scope.sweet.confirm = {
+            title: 'Deleted!',
+            text: 'Your Customer has been deleted.',
+            type: 'success'
+        };
+
+        $scope.sweet.cancel = {
+            title: 'Cancelled!',
+            text: 'Your Customer is safe',
+            type: 'error'
+        }
+
+        $scope.checkCancel=function(){
+            console.log("check cancel")
+        }
+
+        $scope.checkConfirm=function(){
+            console.log("check confrim")
+        }
     }])
 
 

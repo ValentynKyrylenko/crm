@@ -23,7 +23,8 @@
     "angular-chart.js": "^0.10.2",
     "pikaday-angular": "^2.0.0",
     "angular-moment": "^0.10.3",
-    "moment": "^2.13.0"
+    "moment": "^2.13.0",
+    "ng-sweet-alert": "^1.0.7"
   },
   "overrides": {
     "font-awesome": {

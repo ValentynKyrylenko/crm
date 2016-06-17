@@ -53,7 +53,9 @@
                         <div class="btn-group">
                             <a data-toggle="tooltip" data-placement="bottom" title="Customer details" class="btn btn-primary" ui-sref="app.customerdetails({id: customer._id})"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
                             <a data-toggle="tooltip" data-placement="bottom" title="Edit a customer" class="btn btn-warning" ng-click=editCustomer(customer._id)><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                            <a data-toggle="tooltip" data-placement="bottom" title="This will delete a customer!!!" class="btn btn-danger"  ng-click=deletecustomer(customer._id)><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
+                            <!--<a data-toggle="tooltip" data-placement="bottom" title="This will delete a customer!!!" class="btn btn-danger"  ng-click=deletecustomer(customer._id)><i class="fa fa-trash-o" aria-hidden="true" ></i></a>-->
+                            <a class="btn btn-danger" href="" sweetalert sweet-options="{{sweet.option}}" sweet-confirm-option="{{sweet.confirm}}" sweet-cancel-option="{{sweet.cancel}}"  name="login-submit" sweet-on-cancel="checkCancel()" sweet-on-confirm="deletecustomer(customer._id)"  class="btn" ><i class="fa fa-trash-o" aria-hidden="true" ></i></a>
+
                         </div>
                     </td>
 
