@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('crmApp', ['ui.router','ngResource','ngDialog', 'angularUtils.directives.dirPagination','chart.js', 'pikaday','ngMessages','angularMoment'])
+angular.module('crmApp', ['ui.router','ngResource','ngDialog', 'angularUtils.directives.dirPagination','chart.js', 'pikaday','angularMoment'])
     .config(['ChartJsProvider', function (ChartJsProvider) {
         // Configure all charts
         ChartJsProvider.setOptions({
