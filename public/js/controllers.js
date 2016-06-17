@@ -14,6 +14,8 @@ angular.module('crmApp')
                 $scope.message = "Error: " + response.status + " " + response.statusText;
             });
 
+        $scope.pageSize = 10;
+
         $scope.submitCustomer = function () {
 
             customerFactory.save($scope.customer);
@@ -71,7 +73,7 @@ angular.module('crmApp')
         $scope.updateCustomer = function(customer) { //Update the edited movie. Issues a PUT to /api/movies/:id
             customerFactory.update(customer);
             ngDialog.close();
-            $state.go($state.current, {}, {reload: true});
+            $state.go($state.current, {}, {reload: false});
             $scope.customer = {};
         };
 

@@ -30,26 +30,26 @@
                 <thead>
                 <tr>
                     <th>Customer</th>
-                    <th>Country</th>
                     <th>Email</th>
                     <th>Products</th>
                     <th>Event</th>
                     <th>Stage</th>
-                    <th>Country</th>
+                    <th>Notes</th>
+                    <th>Contaced</th>
                     <th ><i class="icon_cogs"></i> Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr dir-paginate="customer in customers | filter: q | filter: q2| itemsPerPage:  pageSize">{{customer}}
-                    <td>{{customer.name}}</td>
-                    <td>{{customer.country}}</td>
-                    <td>{{customer.email}}</td>
-                    <td>{{customer.product}}</td>
-                    <td>{{customer.event_}}</td>
-                    <td>{{customer.country}}</td>
-                    <td>{{customer.dueOn|date:'dd/MM/yyyy'}}</td>
+                    <td width="10%">{{customer.name}}</td>
+                    <td width="5%">{{customer.email}}</td>
+                    <td width="10%">{{customer.product}}</td>
+                    <td width="15%">{{customer.event_}}</td>
+                    <td width="10%">{{customer.stage}}</td>
+                    <td width="20%">{{customer.notes}}</td>
+                    <td width="15%"><span am-time-ago="customer.dueOn"></span></td>
 
-                    <td>
+                    <td width="15%">
                         <div class="btn-group">
                             <a data-toggle="tooltip" data-placement="bottom" title="Customer details" class="btn btn-primary" ui-sref="app.customerdetails({id: customer._id})"><i class="fa fa-question-circle-o" aria-hidden="true"></i></a>
                             <a data-toggle="tooltip" data-placement="bottom" title="Edit a customer" class="btn btn-warning" ng-click=editCustomer(customer._id)><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
